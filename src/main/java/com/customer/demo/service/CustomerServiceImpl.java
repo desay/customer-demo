@@ -9,17 +9,15 @@ import com.customer.demo.numbers.generator.NumberGenerator;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Loggable
 public class CustomerServiceImpl implements CustomerService {
 
-    private static final Logger LOGGER = Logger.getLogger(CustomerService.class.getName());
-
     private static CustomerService instance;
     private final HashMap<Long, Customer> contacts = new HashMap<>();
     private long nextId = 0;
+
+    private Comparator comparator = (Comparator<Customer>) (o1, o2) -> (int) (o2.getId() - o1.getId());
 
     @Inject
     @ThirteenDigits
@@ -42,24 +40,13 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> findAll(String stringFilter) {
         ArrayList<Customer> arrayList = new ArrayList<>();
         for (Customer contact : contacts.values()) {
-            try {
                 boolean passesFilter = (stringFilter == null || stringFilter.isEmpty())
                         || contact.toString().toLowerCase().contains(stringFilter.toLowerCase());
                 if (passesFilter) {
-                    arrayList.add(contact.clone());
+                    arrayList.add(contact);
                 }
-            } catch (CloneNotSupportedException ex) {
-                //log
-                Logger.getLogger(CustomerService.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
-        Collections.sort(arrayList, new Comparator<Customer>() {
-
-            @Override
-            public int compare(Customer o1, Customer o2) {
-                return (int) (o2.getId() - o1.getId());
-            }
-        });
+        Collections.sort(arrayList, comparator);
         return arrayList;
     }
 
@@ -72,17 +59,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void save(Customer customer) {
         if (customer == null) {
-            LOGGER.log(Level.SEVERE,
-                    "Customer is null. Are you sure you have connected your form to the application as described in tutorial chapter 7?");
             return;
         }
         if (customer.getId() == null) {
             customer.setId(nextId++);
-        }
-        try {
-            customer = (Customer) customer.clone();
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
         }
         contacts.put(customer.getId(), customer);
     }
@@ -105,7 +85,7 @@ public class CustomerServiceImpl implements CustomerService {
                 c.setLastName(split[1]);
                 c.setStatus(CustomerStatus.values()[r.nextInt(CustomerStatus.values().length)]);
                 c.setBirthDate(LocalDate.now().minusDays(r.nextInt(365*100)));
-            //    c.setNumber(numberGenerator.generateNumber());
+                // c.setNumber(numberGenerator.generateNumber());
                 save(c);
             }
         }
