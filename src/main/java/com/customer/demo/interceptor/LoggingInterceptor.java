@@ -8,7 +8,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import java.util.logging.Logger;
 
-@Interceptor
+// @Interceptor
 @Loggable
 public class LoggingInterceptor {
 
