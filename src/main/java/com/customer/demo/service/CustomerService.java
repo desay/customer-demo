@@ -8,6 +8,7 @@ public interface CustomerService {
 
     List<Customer> findAll();
     List<Customer> findAll(String stringFilter);
+
     void delete(Customer customer);
     void save(Customer customer);
 

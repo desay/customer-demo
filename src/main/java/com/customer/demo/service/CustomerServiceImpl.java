@@ -2,6 +2,7 @@ package com.customer.demo.service;
 
 import com.customer.demo.model.Customer;
 import com.customer.demo.model.CustomerStatus;
+import com.customer.demo.numbers.EightDigits;
 import com.customer.demo.numbers.Loggable;
 import com.customer.demo.numbers.ThirteenDigits;
 import com.customer.demo.numbers.generator.NumberGenerator;
@@ -21,7 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Inject
     @ThirteenDigits
-    private NumberGenerator numberGenerator;
+    private NumberGenerator thirteenDigitsGenerator;
+
+
+    @Inject
+    @EightDigits
+    private NumberGenerator eightDigitsGenerator;
 
     public static CustomerService getInstance() {
         if (instance == null) {
@@ -85,7 +91,7 @@ public class CustomerServiceImpl implements CustomerService {
                 c.setLastName(split[1]);
                 c.setStatus(CustomerStatus.values()[r.nextInt(CustomerStatus.values().length)]);
                 c.setBirthDate(LocalDate.now().minusDays(r.nextInt(365*100)));
-                // c.setNumber(numberGenerator.generateNumber());
+               // c.setPersonalId(thirteenDigitsGenerator.generateNumber());
                 save(c);
             }
         }
