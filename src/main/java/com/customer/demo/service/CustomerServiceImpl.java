@@ -5,8 +5,8 @@ import com.customer.demo.model.CustomerStatus;
 import com.customer.demo.numbers.Loggable;
 import com.customer.demo.numbers.ThirteenDigits;
 import com.customer.demo.numbers.generator.NumberGenerator;
+import org.atmosphere.inject.annotation.ApplicationScoped;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.*;
@@ -25,14 +25,6 @@ public class CustomerServiceImpl implements CustomerService {
     @ThirteenDigits
     private NumberGenerator numberGenerator;
 
-//
-//    public static CustomerService getInstance() {
-//        if (instance == null) {
-//            instance = new CustomerServiceImpl();
-//            instance.ensureTestData();
-//        }
-//        return instance;
-//    }
 
     @Override
     public List<Customer> findAll() {

@@ -2,11 +2,6 @@ package com.customer.demo.view;
 
 import com.customer.demo.model.Customer;
 import com.customer.demo.service.CustomerService;
-import com.customer.demo.service.CustomerServiceImpl;
-import com.vaadin.cdi.annotation.NormalUIScoped;
-import com.vaadin.cdi.annotation.UIScoped;
-import com.vaadin.cdi.annotation.VaadinServiceScoped;
-import com.vaadin.cdi.annotation.VaadinSessionScoped;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -15,9 +10,6 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
-
 import javax.inject.Inject;
 
 @Route("")
