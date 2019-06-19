@@ -14,7 +14,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-        <vaadin.version>13.0.0</vaadin.version>
+        <vaadin.version>13.0.8</vaadin.version>
     </properties>
 
     <repositories>
@@ -52,6 +52,11 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-cdi</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -63,6 +68,21 @@
             <artifactId>weld-se</artifactId>
             <version>2.3.2.Final</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>org.jboss.weld.servlet</groupId>-->
 <!--            <artifactId>weld-servlet-core</artifactId>-->

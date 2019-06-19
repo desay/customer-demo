@@ -6,11 +6,13 @@ import com.customer.demo.numbers.Loggable;
 import com.customer.demo.numbers.ThirteenDigits;
 import com.customer.demo.numbers.generator.NumberGenerator;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.*;
 
 @Loggable
+@ApplicationScoped
 public class CustomerServiceImpl implements CustomerService {
 
     private static CustomerService instance;
@@ -23,13 +25,14 @@ public class CustomerServiceImpl implements CustomerService {
     @ThirteenDigits
     private NumberGenerator numberGenerator;
 
-    public static CustomerService getInstance() {
-        if (instance == null) {
-            instance = new CustomerServiceImpl();
-            instance.ensureTestData();
-        }
-        return instance;
-    }
+//
+//    public static CustomerService getInstance() {
+//        if (instance == null) {
+//            instance = new CustomerServiceImpl();
+//            instance.ensureTestData();
+//        }
+//        return instance;
+//    }
 
     @Override
     public List<Customer> findAll() {
@@ -85,7 +88,7 @@ public class CustomerServiceImpl implements CustomerService {
                 c.setLastName(split[1]);
                 c.setStatus(CustomerStatus.values()[r.nextInt(CustomerStatus.values().length)]);
                 c.setBirthDate(LocalDate.now().minusDays(r.nextInt(365*100)));
-                // c.setNumber(numberGenerator.generateNumber());
+                c.setNumber(numberGenerator.generateNumber());
                 save(c);
             }
         }

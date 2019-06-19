@@ -13,6 +13,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
+import javax.inject.Inject;
+
 public class CustomerForm extends FormLayout {
     private TextField firstName = new TextField("First name");
     private TextField lastName = new TextField("Last name");
@@ -20,12 +22,14 @@ public class CustomerForm extends FormLayout {
     private DatePicker birthDate = new DatePicker("Birthdate");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
-    private CustomerService service = CustomerServiceImpl.getInstance();
+
+    private CustomerService service;
 
     private Binder<Customer> binder = new Binder<>(Customer.class);
     private MainView mainView;
 
-    public CustomerForm(MainView mainView) {
+    public CustomerForm(MainView mainView, CustomerService service) {
+        this.service = service;
         this.mainView = mainView;
 
         status.setItems(CustomerStatus.values());
@@ -54,14 +58,14 @@ public class CustomerForm extends FormLayout {
     private void save() {
         Customer customer = binder.getBean();
         service.save(customer);
-        mainView.updateList();
+        //mainView.updateList();
         setCustomer(null);
     }
 
     private void delete() {
         Customer customer = binder.getBean();
         service.delete(customer);
-        mainView.updateList();
+        //mainView.updateList();
         setCustomer(null);
     }
 }
