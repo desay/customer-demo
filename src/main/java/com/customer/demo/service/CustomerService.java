@@ -2,6 +2,7 @@ package com.customer.demo.service;
 
 import com.customer.demo.model.Customer;
 
+import javax.inject.Singleton;
 import java.util.List;
 
 public interface CustomerService {

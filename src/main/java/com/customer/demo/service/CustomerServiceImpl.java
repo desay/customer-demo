@@ -29,13 +29,6 @@ public class CustomerServiceImpl implements CustomerService {
     @EightDigits
     private NumberGenerator eightDigitsGenerator;
 
-    public static CustomerService getInstance() {
-        if (instance == null) {
-            instance = new CustomerServiceImpl();
-            instance.ensureTestData();
-        }
-        return instance;
-    }
 
     @Override
     public List<Customer> findAll() {
@@ -91,7 +84,7 @@ public class CustomerServiceImpl implements CustomerService {
                 c.setLastName(split[1]);
                 c.setStatus(CustomerStatus.values()[r.nextInt(CustomerStatus.values().length)]);
                 c.setBirthDate(LocalDate.now().minusDays(r.nextInt(365*100)));
-               // c.setPersonalId(thirteenDigitsGenerator.generateNumber());
+               c.setPersonalId(thirteenDigitsGenerator.generateNumber());
                 save(c);
             }
         }
